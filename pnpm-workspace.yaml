@@ -1,0 +1,11 @@
+# sharp: optimización de imágenes de Next. unrs-resolver: resolución de módulos de ESLint.
+# Ambos son dependencias transitivas del propio toolchain de Next/ESLint y necesitan
+# compilar binarios nativos en la instalación.
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
+# `ai` y `@ai-sdk/gateway` quedan exentos del gate de antigüedad mínima porque
+# pineamos AI SDK 6 deliberadamente (ver README → Decisiones de stack).
+minimumReleaseAgeExclude:
+  - '@ai-sdk/gateway@3.0.151'
+  - ai@6.0.228

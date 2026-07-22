@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git --version)",
+      "Bash(curl -s \"https://api.github.com/repos/supabase/agent-skills/contents/skills\")",
+      "Bash(rm -rf \"/private/tmp/claude-501/-Users-pooljosueinfantasquispe-Desktop-agente-clinica/14845e4a-684e-462f-9c52-0c11d9e0a7b1/scratchpad/agent-skills\" && echo \"temporal limpiado\" && echo \"\" && echo \"=== ESTRUCTURA FINAL ===\" && cd \"/Users/pooljosueinfantasquispe/Desktop/agente clinica\" && find . -maxdepth 3 -type d | sort)",
+      "Bash(corepack enable *)",
+      "Bash(corepack prepare *)",
+      "Bash(pnpm -v)",
+      "Bash(corepack pnpm *)",
+      "Bash(docker --version)",
+      "Bash(timeout 15 docker info)",
+      "Bash(timeout 120 npx -y supabase@latest --version)",
+      "Bash(npx -y supabase@latest --version)",
+      "Bash(npx -y supabase@latest init --force)",
+      "Bash(node --input-type=module -e ' *)",
+      "Bash(SC=/private/tmp/claude-501/-Users-pooljosueinfantasquispe-Desktop-agente-clinica/4c8c9bf5-563d-4eff-bb7e-5fe24a7dc265/scratchpad node --input-type=module -e ' *)",
+      "Bash(export SC=/private/tmp/claude-501/-Users-pooljosueinfantasquispe-Desktop-agente-clinica/4c8c9bf5-563d-4eff-bb7e-5fe24a7dc265/scratchpad)",
+      "Bash(node --experimental-strip-types --input-type=module -e ' *)",
+      "Bash(SC=/private/tmp/claude-501/-Users-pooljosueinfantasquispe-Desktop-agente-clinica/4c8c9bf5-563d-4eff-bb7e-5fe24a7dc265/scratchpad/probe; cd \"$SC\" && echo \"=== anthropic provider exports ===\" && grep -oE \"declare const anthropic|export \\\\{[^}]*anthropic[^}]*\\\\}|createAnthropic\" package/../node_modules/@ai-sdk/anthropic/dist/index.d.ts 2>/dev/null | head; ls node_modules/@ai-sdk/anthropic/dist/ 2>/dev/null | head; echo \"--- via installed pkg ---\"; cd \"/Users/pooljosueinfantasquispe/Desktop/agente clinica\" && grep -oE \"declare const anthropic[^;]*|createAnthropic\" node_modules/@ai-sdk/anthropic/dist/index.d.ts | head -3)",
+      "Read(//Users/pooljosueinfantasquispe/Desktop/agente clinica/node_modules/@ai-sdk/anthropic/dist/**)",
+      "Bash(node -e 'const i=require\\(\"@phosphor-icons/react\"\\); console.log\\(\"Flask:\", typeof i.Flask\\); console.log\\(\"FlaskifyIcon:\", typeof i.FlaskifyIcon\\); console.log\\(\"TestTube:\", typeof i.TestTube\\); console.log\\(\"Robot:\", typeof i.Robot\\);')",
+      "Bash(grep -rnE \"\\(sk-ant-|EAAG[A-Za-z0-9]{20,}|AIza[A-Za-z0-9]{20,}|service_role.*ey[A-Za-z0-9]\\)\" app lib --include=\"*.ts\" --include=\"*.tsx\")",
+      "Bash(node -e 'const p=require\\(\"./package.json\"\\); console.log\\(\"prod:\", Object.keys\\(p.dependencies\\).join\\(\", \"\\)\\); console.log\\(\"dev:\", Object.keys\\(p.devDependencies\\).join\\(\", \"\\)\\)')",
+      "Bash(break)",
+      "Bash(curl -s -o /dev/null -w \"landing → %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"login → %{http_code}\\\\n\" http://localhost:3000/login)"
+    ]
+  }
+}
