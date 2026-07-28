@@ -6,10 +6,41 @@
 // convierten entre "hora de pared en una timezone" e instantes absolutos (UTC).
 // ============================================================================
 
+/**
+ * Timezone usada cuando la organización no tiene una válida. Coincide con el
+ * default de la columna `organizations.timezone` en la base de datos.
+ */
+export const DEFAULT_TIME_ZONE = "America/Mexico_City";
+
+const tzValidityCache = new Map<string, boolean>();
+
+/**
+ * Normaliza un identificador IANA: devuelve el mismo string si es válido, o
+ * `DEFAULT_TIME_ZONE` si viene vacío, nulo o no lo reconoce el runtime. Evita
+ * que un dato malo en `organizations.timezone` tumbe la página con
+ * `RangeError: Invalid time zone specified`.
+ */
+export function resolveTimeZone(timeZone?: string | null): string {
+  const candidate = typeof timeZone === "string" ? timeZone.trim() : "";
+  if (!candidate) return DEFAULT_TIME_ZONE;
+
+  let valid = tzValidityCache.get(candidate);
+  if (valid === undefined) {
+    try {
+      new Intl.DateTimeFormat("en-US", { timeZone: candidate });
+      valid = true;
+    } catch {
+      valid = false;
+    }
+    tzValidityCache.set(candidate, valid);
+  }
+  return valid ? candidate : DEFAULT_TIME_ZONE;
+}
+
 /** Offset (ms) de la timezone respecto a UTC en el instante `date`. tz - utc. */
 function tzOffsetMs(date: Date, timeZone: string): number {
   const dtf = new Intl.DateTimeFormat("en-US", {
-    timeZone,
+    timeZone: resolveTimeZone(timeZone),
     hourCycle: "h23",
     year: "numeric",
     month: "2-digit",
@@ -55,7 +86,7 @@ export function zonedWallTimeToUtc(
 /** Clave de día de la semana (mon..sun) de un instante, en la timezone dada. */
 export function weekdayKey(date: Date, timeZone: string): string {
   const wd = new Intl.DateTimeFormat("en-US", {
-    timeZone,
+    timeZone: resolveTimeZone(timeZone),
     weekday: "short",
   })
     .format(date)
@@ -70,7 +101,7 @@ export function zonedDateParts(
   timeZone: string,
 ): { year: number; month: number; day: number } {
   const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone,
+    timeZone: resolveTimeZone(timeZone),
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -121,7 +152,7 @@ export function currentWeekRangeUtc(timeZone: string): { start: Date; end: Date 
 /** Etiqueta legible en español de un instante, en la timezone dada. */
 export function humanLabel(date: Date, timeZone: string): string {
   return new Intl.DateTimeFormat("es-MX", {
-    timeZone,
+    timeZone: resolveTimeZone(timeZone),
     weekday: "long",
     day: "numeric",
     month: "long",

@@ -3,13 +3,15 @@ import { ChatsCircle, CalendarCheck } from "@phosphor-icons/react/dist/ssr";
 import { PageHeader } from "@/components/PageHeader";
 import { requireUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
-import { currentWeekRangeUtc } from "@/lib/tz";
+import { currentWeekRangeUtc, resolveTimeZone } from "@/lib/tz";
 
 export default async function DashboardPage() {
   const { organization } = await requireUser();
   const supabase = await createClient();
   const orgId = organization!.id;
-  const tz = organization!.timezone;
+  // Nunca pasar el valor crudo de la BD a Intl: si viniera vacío o con un
+  // identificador inválido, `Intl.DateTimeFormat` lanza RangeError y tumba la ruta.
+  const tz = resolveTimeZone(organization?.timezone);
 
   // Server Component async: se renderiza una vez por request, así que leer la
   // hora actual aquí es correcto (la regla de pureza aplica a componentes cliente).
@@ -149,7 +151,7 @@ interface DayBucket {
 /** Cuenta conversaciones por día (en la tz) para los últimos 30 días. */
 function buildDailyChart(timestamps: string[], timeZone: string): DayBucket[] {
   const fmt = new Intl.DateTimeFormat("en-CA", {
-    timeZone,
+    timeZone: resolveTimeZone(timeZone),
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/PageHeader";
 import { requireUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
+import { resolveTimeZone } from "@/lib/tz";
 import { CalendarView, type Appointment } from "./CalendarView";
 
 export default async function CitasPage() {
@@ -23,7 +24,7 @@ export default async function CitasPage() {
       />
       <CalendarView
         appointments={(appointments ?? []) as Appointment[]}
-        timeZone={organization!.timezone}
+        timeZone={resolveTimeZone(organization?.timezone)}
       />
     </div>
   );
