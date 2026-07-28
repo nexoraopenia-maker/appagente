@@ -24,7 +24,11 @@
       "Bash(node -e 'const p=require\\(\"./package.json\"\\); console.log\\(\"prod:\", Object.keys\\(p.dependencies\\).join\\(\", \"\\)\\); console.log\\(\"dev:\", Object.keys\\(p.devDependencies\\).join\\(\", \"\\)\\)')",
       "Bash(break)",
       "Bash(curl -s -o /dev/null -w \"landing → %{http_code}\\\\n\" http://localhost:3000/)",
-      "Bash(curl -s -o /dev/null -w \"login → %{http_code}\\\\n\" http://localhost:3000/login)"
+      "Bash(curl -s -o /dev/null -w \"login → %{http_code}\\\\n\" http://localhost:3000/login)",
+      "Bash(echo \"helper_exit=$?\")",
+      "Read(//Users/pooljosueinfantasquispe/**)",
+      "Bash(perl -pi -e \"s/'America\\\\/Mexico_City'/'America\\\\/Lima'/g\" supabase/APPLY_ALL.sql)",
+      "Bash(git checkout *)"
     ]
   }
 }

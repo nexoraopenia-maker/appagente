@@ -10,7 +10,7 @@
  * Timezone usada cuando la organización no tiene una válida. Coincide con el
  * default de la columna `organizations.timezone` en la base de datos.
  */
-export const DEFAULT_TIME_ZONE = "America/Mexico_City";
+export const DEFAULT_TIME_ZONE = "America/Lima";
 
 const tzValidityCache = new Map<string, boolean>();
 

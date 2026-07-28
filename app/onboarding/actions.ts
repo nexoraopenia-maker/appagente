@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { DEFAULT_TIME_ZONE } from "@/lib/tz";
 
 export interface OnboardingState {
   error?: string;
@@ -24,7 +25,7 @@ export async function createOrganization(
   const name = String(formData.get("name") ?? "").trim();
   const fullName = String(formData.get("full_name") ?? "").trim() || null;
   const timezone =
-    String(formData.get("timezone") ?? "").trim() || "America/Mexico_City";
+    String(formData.get("timezone") ?? "").trim() || DEFAULT_TIME_ZONE;
 
   if (!name) return { error: "El nombre del negocio es obligatorio." };
 

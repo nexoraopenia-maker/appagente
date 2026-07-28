@@ -1,15 +1,16 @@
 "use client";
 
 import { useActionState } from "react";
+import { DEFAULT_TIME_ZONE } from "@/lib/tz";
 import { createOrganization, type OnboardingState } from "./actions";
 
 const initial: OnboardingState = {};
 
 // Lista corta de timezones comunes en LatAm/España. El usuario puede cambiarla luego.
 const TIMEZONES = [
+  "America/Lima",
   "America/Mexico_City",
   "America/Bogota",
-  "America/Lima",
   "America/Argentina/Buenos_Aires",
   "America/Santiago",
   "America/New_York",
@@ -55,7 +56,7 @@ export function OnboardingForm() {
         <select
           id="timezone"
           name="timezone"
-          defaultValue="America/Mexico_City"
+          defaultValue={DEFAULT_TIME_ZONE}
           className="w-full rounded-lg border border-border bg-card px-3 py-2 outline-none focus:border-primary"
         >
           {TIMEZONES.map((tz) => (
